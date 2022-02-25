@@ -1,2 +1,2 @@
 # rprojects
-R Projects for Statistical Computing
+R projects for statistical computing and data analysis
