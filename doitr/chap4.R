@@ -35,3 +35,25 @@ mean(sales$price)
 mean(sales$volume)
 
 # 04-3 importing external data
+install.packages("readxl")
+library(readxl)
+df_exam <-read_excel("C:/data/doitr/Data/excel_exam.xlsx")
+df_exam
+#english와 science 점수 평균 구하기
+mean(df_exam$english)
+mean(df_exam$science)
+
+df_exam_novar <- read_excel("C:/data/doitr/Data/excel_exam_novar.xlsx") #엑셀 파일 첫 번째 행을 변수명으로 인식
+df_exam_novar
+
+df_exam_novar <- read_excel("C:/data/doitr/Data/excel_exam_novar.xlsx", col_names = F) #첫 번째 행을 변수명이 아닌 데이터로 인식, 변수명은 '숫자'로 자동 지정
+df_exam_novar
+
+#엑셀 파일에 시트가 여러개인 경우
+df_exam_sheet <- read_excel("C:/data/doitr/Data/excel_exam_sheet.xlsx", sheet = 3)
+
+#csv 파일 불러오기: 별도의 패키지 설치 불필요
+df_csv_exam <- read.csv("C:/data/doitr/Data/csv_exam.csv")
+df_csv_exam
+#첫 번째 행에 변수명이 없는 경우
+df_csv_exam <- read.csv("C:/data/doitr/Data/csv_exam.csv", header = F)
