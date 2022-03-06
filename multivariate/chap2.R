@@ -1,4 +1,4 @@
-# chap3. Principle Component Analysis
+# chap2. Principle Component Analysis
 
 # R 2.2
 install.packages("HSAUR2")
