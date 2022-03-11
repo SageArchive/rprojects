@@ -1,4 +1,4 @@
-#chap2.단순회귀모형(2)
+#3강.단순회귀모형(2)
 
 #산점도 scatter plot
 market = read.table("c:/data/reg/market1.txt", header=T)
@@ -7,8 +7,19 @@ plot(market$X, market$Y, xlab = "광고료", ylab = "총판매액", pch=19)
 title("광고료와 판매액의 산점도")
 
 #회귀선 추정
-market.lm = lm(Y ~ X, data=market)
+market.lm = lm(Y ~ X, data=market) #lm: linear model
+market.lm
+
 summary(market.lm)
+market.lm.summary <- summary(market.lm) #Residuals, Coefficients 변수 호출 가능
+market.lm.summary
+market.lm.summary$coefficients
+
+# 추정된 회귀식 Ŷ = 0.3282 + 2.1497X
+β0 <- market.lm.summary$coefficients[1,1]
+β1 <- market.lm.summary$coefficients[1,2]
+cat('β0 :', β0, '\n')
+cat('β1 :', β1)
 
 #산점도 위에 회귀직선 그리기
 plot(market$X, market$Y, xlab = "광고료", ylab = "총판매액", pch=19)
@@ -32,6 +43,8 @@ text(locator(1), fx)
 #분산분석표
 market.lm = lm(Y ~ X, data=market)
 anova(market.lm)
+market.lm.anova <- anova(market.lm)
+market.lm.anova
 #p-value가 매우 작은 값이므로 귀무가설 기각
 #유의수준 0.05에서 F-기각역
 qf(0.95, 1, 13) #F-value=192.9 > F(1,13,0.05)이므로 귀무가설 기각
@@ -63,6 +76,8 @@ pc = predict(market.lm, int="c", newdata=pred.frame) #기댓값 신뢰구간간
 pp = predict(market.lm, int="p", newdata=pred.frame) #새로운 값 신뢰구간
 head(pc, 3)
 head(pp, 3)
+t(pc)
+t(pp)
 pred.X = pred.frame$X
 pred.X
 plot(market$X, market$Y, ylim=range(market$Y, pp))
