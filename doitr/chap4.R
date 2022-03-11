@@ -57,3 +57,19 @@ df_csv_exam <- read.csv("C:/data/doitr/Data/csv_exam.csv")
 df_csv_exam
 #첫 번째 행에 변수명이 없는 경우
 df_csv_exam <- read.csv("C:/data/doitr/Data/csv_exam.csv", header = F)
+
+#데이터 프레임을 CSV 파일로 저장하기
+#데이터 프레임 만들기
+df_midterm <- data.frame(english = c(90, 80, 60, 70), math = c(50, 60, 100, 20), class = c(1, 1, 2, 2))
+df_midterm
+#CSV 파일로 저장하기
+write.csv(df_midterm, file = "df_midterm.csv") #저장한 파일은 프로젝트 폴더에 생성됨
+
+#RDS 파일: R 전용 파일, 읽고 쓰는 속도가 빠르고 용량이 작음
+#데이터 프레임을 RDS 파일로 저장하기
+saveRDS(df_midterm, file = "df_midterm.rds") #저장한 파일은 프로젝트 폴더에 생성됨
+#RDS 파일 불러오기 
+rm(df_midterm) #앞에서 만든 데이터프레임 삭제
+df_midterm #Error: object 'df_midterm' not found
+df_midterm <- readRDS("df_midterm.rds") #RDS 파일을 불러와 df_midterm에 할당
+df_midterm #데이터 제대로 출력
