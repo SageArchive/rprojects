@@ -1,7 +1,7 @@
 #chap2.단순회귀모형(1)
 
 #산점도 scatter plot
-market = read.table("c:/data/reg/market1.txt", header=T)
+market = read.table("c:/data/reg/market-1.txt", header=T)
 head(market)
 plot(market$X, market$Y, xlab="광고료", ylab="총판매액", pch=19)
 title("광고료와 판매액의 산점도")
