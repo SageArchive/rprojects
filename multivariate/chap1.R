@@ -1,4 +1,4 @@
-# Chap1. Data Visualization of Multivariate Analysis
+#Chap1. Data Visualization of Multivariate Analysis
 
 #1.1 기술통계량과 분할표
 survey = read.csv("c:/data/mva/survey.csv")
@@ -70,3 +70,60 @@ stem(survey$salary, scale=2)
 #상자그림 box plot
 boxplot(salary ~ sex, data=survey)
 title("Boxplot of Salary")
+
+#1.3 이변량 그래프
+#plot using lines
+plot(co2)
+lines(smooth(co2),col="BLUE")
+#plot of mathematical functions
+x <- seq(0, 20, 0.1) 
+y <- exp(-x/10)*cos(2*x) 
+plot(x,y,type="l") 
+
+#Bivariate boxplot
+install.packages("HSAUR2")
+library(HSAUR2)
+install.packages("MVA")
+library(MVA)
+data(USairpollution)
+# SO2: SO2 content of air in micrograms per cubic metre.
+# temp: average annual temperature in Fahrenheit.
+# manu: number of manufacturing enterprises employing 20 or more workers.
+# popul: population size (1970 census); in thousands.
+# wind: average annual wind speed in miles per hour.
+# precip: average annual precipitation in inches.
+# predays: average number of days with precipitation per year.
+head(USairpollution, 3)
+x = USairpollution[, c(3,4)]
+bvbox(x, xlab="manu", ylab="popul", pch=19)
+title("Bivariate Boxplot")
+identify(x) #그래프에서 아웃라이어 표시
+rownames(x)[c(7,9,14,30)] #아웃라이어 도시 확인
+
+#Bubble plot
+plot(wind~temp, data=USairpollution, pch=9)
+# symbols(USairpollution$temp, USairpollution$wind, USairpollution$circle=SO2, inches=0.5, add=T) 대신
+with(USairpollution, symbols(temp, wind, circle=SO2, inches=0.5, add=T))
+title("Bubble plot")
+
+#1.4 다차원 그래프
+#산점도 행렬
+social = read.table("c:/data/mva/social.txt", header=T)
+head(social, 3)
+pairs(social)
+round(cor(social, use="complete.obs"), 3)
+
+#별그림(star plot)
+social2 = social[, -1]
+year = social[,1]
+rownames(social2) = year
+stars(social2)
+
+#얼굴그림(faces plot)
+install.packages("aplpack")
+library(aplpack) 
+# faces(social2, face.type=0, na.rm=TRUE)
+par(mfrow=c(1,3))
+faces(social2, face.type=0)
+faces(social2, face.type=1)
+#face.type=0은 선만 그리기, 1은 선 색칠하기
