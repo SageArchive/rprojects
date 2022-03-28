@@ -43,6 +43,7 @@ screeplot(hep_pca, type="lines", pch=19, main="Scree plot")
 hep_var = hep_pca$sdev^2
 hep_var_ratio = hep_var/sum(hep_var)
 round(hep_var_ratio, 3)
+cumsum(hep_var_ratio)
 plot(cumsum(hep_var_ratio), type='b', pch=19, xlab='Component', ylab='Cumulative Proportion')
 title('Variance Explained')
 
