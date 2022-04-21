@@ -50,3 +50,29 @@ kmc
 # K-평균 소속 군집 산점도
 plot(zbeer, col=kmc$cluster, pch=16) # 처음 두 개 변수 사용
 pairs(zbeer, col=kmc$cluster, pch=16, cex.labels=1.5) # 모든 변수 사용
+
+# 군집분석 사례2
+head(USArrests)
+summary(USArrests)
+zUSArrests=scale(USArrests)
+
+# 계층적 군집분석: 평균연결법
+hc_a = hclust(dist(zUSArrests), method="average")
+hc_a
+plot(hc_a, hang=-1) 
+
+# 소속 군집 알기
+hcmember <- cutree(hc_a, k=5)
+hcmember
+
+# 각 군집별중심점 찾기
+data_combined = cbind(USArrests, hcmember)
+aggregate(.~hcmember, data_combined, mean)
+
+# 비계층적 군집분석: K-평균 군집분석
+zUSArrests = scale(USArrests) # 자료 표준화화
+kmc1 = kmeans(zUSArrests, 4)
+kmc1
+
+# K-평균 소속 군집 산점도
+pairs(USArrests, col=kmc1$cluster, pch=16, cex.labels=1.5)
